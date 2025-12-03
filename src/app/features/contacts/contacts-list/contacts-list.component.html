@@ -1,0 +1,88 @@
+<section>
+  <div class="header-row">
+    <h2>Contacts</h2>
+    <button (click)="onAdd()">Nouveau contact</button>
+  </div>
+
+  <div class="filters">
+    <input
+      type="search"
+      placeholder="Rechercher par nom..."
+      [value]="searchTerm"
+      (input)="onSearch($any($event.target).value)"
+    />
+
+    <select
+      [value]="categoryFilter"
+      (change)="onCategoryChange($any($event.target).value)"
+    >
+      <option value="toutes">Toutes les catégories</option>
+      <option *ngFor="let cat of categories" [value]="cat.id">
+        {{ cat.name }}
+      </option>
+    </select>
+
+    <label>
+      <input
+        type="checkbox"
+        [checked]="onlyFavorites"
+        (change)="onToggleFavoritesOnly($any($event.target).checked)"
+      />
+      Favoris uniquement
+    </label>
+
+    <select
+      [value]="sortField"
+      (change)="onSortFieldChange($any($event.target).value)"
+    >
+      <option value="name">Nom</option>
+      <option value="date">Date de création</option>
+    </select>
+
+    <select
+      [value]="sortDirection"
+      (change)="onSortDirectionChange($any($event.target).value)"
+    >
+      <option value="asc">Croissant</option>
+      <option value="desc">Décroissant</option>
+    </select>
+  </div>
+
+  <table class="list">
+    <thead>
+      <tr>
+        <th>Nom complet</th>
+        <th>Société</th>
+        <th>Poste</th>
+        <th>Catégorie</th>
+        <th>Favori</th>
+        <th>Créé le</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of filtered; trackBy: trackById">
+        <td>{{ contact.firstName }} {{ contact.lastName }}</td>
+        <td>{{ contact.company || '-' }}</td>
+        <td>{{ contact.jobTitle || '-' }}</td>
+        <td>{{ getCategoryName(contact.categoryId) }}</td>
+        <td>
+          <button type="button" (click)="onToggleFavorite(contact)">
+            {{ contact.favorite ? '★' : '☆' }}
+          </button>
+        </td>
+        <td>{{ contact.createdAt | date : 'shortDate' }}</td>
+        <td>
+          <a [routerLink]="['/contacts', contact.id]">Détails</a>
+          |
+          <a [routerLink]="['/contacts', contact.id, 'modifier']">Modifier</a>
+          |
+          <button type="button" (click)="onDelete(contact)">Supprimer</button>
+        </td>
+      </tr>
+      <tr *ngIf="filtered.length === 0">
+        <td colspan="7">Aucun contact trouvé.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

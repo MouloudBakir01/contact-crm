@@ -1,0 +1,101 @@
+<h2>{{ isEdit ? 'Modifier un contact' : 'Nouveau contact' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <div class="field">
+    <label>Prénom *</label>
+    <input type="text" formControlName="firstName" />
+    <small
+      class="error"
+      *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid"
+    >
+      <span *ngIf="form.get('firstName')?.errors?.['required']">
+        Ce champ est obligatoire.
+      </span>
+      <span *ngIf="form.get('firstName')?.errors?.['maxlength']">
+        50 caractères maximum.
+      </span>
+    </small>
+  </div>
+
+  <div class="field">
+    <label>Nom *</label>
+    <input type="text" formControlName="lastName" />
+    <small
+      class="error"
+      *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid"
+    >
+      <span *ngIf="form.get('lastName')?.errors?.['required']">
+        Ce champ est obligatoire.
+      </span>
+      <span *ngIf="form.get('lastName')?.errors?.['maxlength']">
+        50 caractères maximum.
+      </span>
+    </small>
+  </div>
+
+  <div class="field">
+    <label>Email *</label>
+    <input type="email" formControlName="email" />
+    <small
+      class="error"
+      *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
+    >
+      <span *ngIf="form.get('email')?.errors?.['required']">
+        Ce champ est obligatoire.
+      </span>
+      <span *ngIf="form.get('email')?.errors?.['email']">
+        Format d'email invalide.
+      </span>
+    </small>
+  </div>
+
+  <div class="field">
+    <label>Téléphone</label>
+    <input type="tel" formControlName="phone" />
+    <small
+      class="error"
+      *ngIf="form.get('phone')?.touched && form.get('phone')?.errors?.['phone']"
+    >
+      Format de téléphone invalide.
+    </small>
+  </div>
+
+  <div class="field">
+    <label>Société</label>
+    <input type="text" formControlName="company" />
+  </div>
+
+  <div class="field">
+    <label>Poste</label>
+    <input type="text" formControlName="jobTitle" />
+  </div>
+
+  <div class="field">
+    <label>Catégorie</label>
+    <select formControlName="categoryId">
+      <option [ngValue]="null">Aucune</option>
+      <option *ngFor="let cat of categories" [ngValue]="cat.id">
+        {{ cat.name }}
+      </option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>
+      <input type="checkbox" formControlName="favorite" />
+      Marquer comme favori
+    </label>
+  </div>
+
+  <div class="field">
+    <label>Notes</label>
+    <textarea formControlName="notes" rows="4"></textarea>
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="form.invalid">
+      {{ isEdit ? 'Enregistrer les modifications' : 'Créer le contact' }}
+    </button>
+    <button type="button" (click)="onCancel()">Annuler</button>
+  </div>
+</form>

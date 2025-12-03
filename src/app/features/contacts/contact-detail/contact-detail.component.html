@@ -1,0 +1,19 @@
+<section *ngIf="contact; else notFound">
+  <h2>Détail du contact</h2>
+  <p><strong>Nom :</strong> {{ contact.firstName }} {{ contact.lastName }}</p>
+  <p><strong>Email :</strong> {{ contact.email }}</p>
+  <p><strong>Téléphone :</strong> {{ contact.phone || 'Non renseigné' }}</p>
+  <p><strong>Société :</strong> {{ contact.company || 'Non renseigné' }}</p>
+  <p><strong>Poste :</strong> {{ contact.jobTitle || 'Non renseigné' }}</p>
+  <p><strong>Notes :</strong> {{ contact.notes || 'Aucune' }}</p>
+
+  <p>
+    <a [routerLink]="['/contacts', contact.id, 'modifier']">Modifier</a> |
+    <a routerLink="/contacts">Retour à la liste</a>
+  </p>
+</section>
+
+<ng-template #notFound>
+  <p>Contact introuvable.</p>
+  <a routerLink="/contacts">Retour à la liste</a>
+</ng-template>

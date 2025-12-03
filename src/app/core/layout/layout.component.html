@@ -1,0 +1,20 @@
+<header class="app-header">
+  <div class="app-header__title">Contacter le CRM</div>
+  <nav class="app-header__nav">
+    <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+      Accueil
+    </a>
+    <a routerLink="/contacts" routerLinkActive="active">Contacts</a>
+    <a routerLink="/categories" routerLinkActive="active">Catégories</a>
+    <a routerLink="/favorites" routerLinkActive="active">Favoris</a>
+  </nav>
+</header>
+
+<main class="app-main">
+  <!-- routes Dashboard, Contacts, etc. -->
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="app-footer">
+  © {{ new Date().getFullYear() }} - Contacter le CRM
+</footer>

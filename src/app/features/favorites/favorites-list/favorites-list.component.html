@@ -1,0 +1,17 @@
+<section>
+  <h2>Contacts favoris</h2>
+
+  <div class="cards">
+    <article class="card" *ngFor="let contact of favorites">
+      <h3>{{ contact.firstName }} {{ contact.lastName }}</h3>
+      <p *ngIf="contact.company">{{ contact.company }} — {{ contact.jobTitle }}</p>
+      <p>{{ contact.email }}</p>
+      <p *ngIf="contact.phone">Tél : {{ contact.phone }}</p>
+      <a [routerLink]="['/contacts', contact.id]">Voir la fiche</a>
+    </article>
+
+    <p *ngIf="favorites.length === 0">
+      Aucun contact favori pour le moment.
+    </p>
+  </div>
+</section>

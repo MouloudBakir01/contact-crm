@@ -1,0 +1,40 @@
+<section>
+  <div class="header-row">
+    <h2>Catégories</h2>
+    <button (click)="onAdd()">Nouvelle catégorie</button>
+  </div>
+
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <table class="list">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Couleur</th>
+        <th>Créée le</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of categories">
+        <td>{{ cat.name }}</td>
+        <td>
+          <span
+            class="color-dot"
+            [style.backgroundColor]="cat.color"
+          ></span>
+          {{ cat.color }}
+        </td>
+        <td>{{ cat.createdAt | date : 'shortDate' }}</td>
+        <td>
+          <a [routerLink]="['/categories', cat.id]">Voir les contacts</a>
+          |
+          <button type="button" (click)="onDelete(cat.id)">Supprimer</button>
+        </td>
+      </tr>
+      <tr *ngIf="categories.length === 0">
+        <td colspan="4">Aucune catégorie pour le moment.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

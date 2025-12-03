@@ -1,0 +1,26 @@
+<section class="dashboard">
+  <h1>Tableau de bord</h1>
+  <p>Bienvenue dans votre mini CRM.</p>
+
+  <div class="stats">
+    <div class="card">
+      <h2>{{ totalContacts }}</h2>
+      <p>Contacts au total</p>
+    </div>
+    <div class="card">
+      <h2>{{ totalFavorites }}</h2>
+      <p>Contacts favoris</p>
+    </div>
+    <div class="card">
+      <h2>{{ totalCategories }}</h2>
+      <p>Catégories</p>
+    </div>
+  </div>
+
+ <div class="dashboard-actions">
+  <a routerLink="/contacts" class="btn action">Voir tous les contacts</a>
+  <a routerLink="/contacts/nouveau" class="btn action">Créer un contact</a>
+  <a routerLink="/categories" class="btn action">Gérer les catégories</a>
+</div>
+
+</section>

@@ -1,0 +1,22 @@
+<h2>Nouvelle catégorie</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <div class="field">
+    <label>Nom *</label>
+    <input type="text" formControlName="name" />
+    <small class="error" *ngIf="form.controls.name.touched && form.controls.name.invalid">
+      <span *ngIf="form.controls.name.errors?.['required']">Ce champ est obligatoire.</span>
+      <span *ngIf="form.controls.name.errors?.['maxlength']">50 caractères maximum.</span>
+    </small>
+  </div>
+
+  <div class="field">
+    <label>Couleur</label>
+    <input type="color" formControlName="color" />
+  </div>
+
+  <div class="actions">
+    <button type="submit" [disabled]="form.invalid">Créer la catégorie</button>
+    <button type="button" (click)="onCancel()">Annuler</button>
+  </div>
+</form>
